@@ -1,4 +1,5 @@
-import Nav from '../components/nav';
+import Nav from '../components/Nav';
+import Product from '../components/Product';
 
 export default function IndexPage({ products }) {
   return (
@@ -6,6 +7,11 @@ export default function IndexPage({ products }) {
       <Nav />
       <div className='hero'>
         <h1 className='title'>Coffee club</h1>
+        <div>
+          {products.map((product, index) => (
+            <Product key={index} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -23,8 +29,6 @@ export async function getStaticProps() {
   const data = await res.json();
 
   const products = data.records.map(product => product.fields);
-
-  console.log(products);
 
   return {
     props: {
